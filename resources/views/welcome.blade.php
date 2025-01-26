@@ -61,7 +61,27 @@
             <a href="{{ url('/buku') }}" class="btn btn-dark">Buku</a>
             <a href="{{ url('/registrasi') }}" class="btn btn-warning">Form Registrasi</a>
         </div>
+
+        <!-- Login Card -->
+        <div class="card mt-4" style="width: 18rem; margin: auto;">
+            <div class="card-body">
+                <h5 class="card-title">Login</h5>
+                <form action="{{ route('user.login') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" value="user@mail.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" value="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
     </div>
+
     <footer>
         <a href="https://www.instagram.com/dzakyyy_._?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">

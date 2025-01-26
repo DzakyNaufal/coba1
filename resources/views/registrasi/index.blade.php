@@ -83,6 +83,12 @@
                     </div>
                     <button type="button" onclick="submitForm()" class="btn btn-primary">Daftar</button>
                     <a href="{{ url('/') }}" class="btn btn-secondary">Kembali</a>
+
+                    <!-- Logout Button -->
+                    <form action="{{ route('user.logout') }}" method="POST" style="display:inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
                 </form>
             </div>
         </div>
