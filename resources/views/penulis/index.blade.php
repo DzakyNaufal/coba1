@@ -12,6 +12,27 @@
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Hi Admin</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/penulis') }}">Penulis</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/buku') }}">Buku</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <div class="text-left mt-4">
             <a href="{{ url('/') }}" class="btn btn-secondary">Kembali</a>
@@ -59,7 +80,6 @@
             </div>
         </div>
     </div>
-
     <script>
         new DataTable('.datatable'); // menggunakan class
     </script>

@@ -50,7 +50,9 @@
 <body>
     <!-- Header -->
     <header>
-        <div></div> <!-- Placeholder untuk menyelaraskan posisi kanan -->
+        <div>
+            <a href="{{ url('/admin/login') }}" class="btn btn-danger"> Login Admin</a>
+        </div>
         <div>Hi Bosss!</div>
     </header>
 
@@ -65,7 +67,7 @@
         <!-- Login Card -->
         <div class="card mt-4" style="width: 18rem; margin: auto;">
             <div class="card-body">
-                <h5 class="card-title">Login</h5>
+                <h5 class="card-title">Login User</h5>
                 <form action="{{ route('user.login') }}" method="POST">
                     @csrf
                     <div class="mb-3">

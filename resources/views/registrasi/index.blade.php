@@ -10,6 +10,24 @@
     crossorigin="anonymous">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Hi Admin</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/registrasi') }}">Registerasiiiiiiiiiiiiiiiiiii</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex">
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
     <div class="container mt-5">
         <div class="card">
             <div class="card-body">
@@ -23,7 +41,7 @@
                         </ul>
                     </div>
                 @endif
-                <form method="POST" action="{{ route('registrasi.store') }}" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('cetak', ['id' => 'nama']) }}" enctype="multipart/form-data" onsubmit="return submitForm()">
                     @csrf
                     <div class="form-group mb-3">
                         <label>Nama</label>
@@ -81,14 +99,8 @@
                         <label>Alamat</label>
                         <textarea class="form-control" name="alamat" required></textarea>
                     </div>
-                    <button type="button" onclick="submitForm()" class="btn btn-primary">Daftar</button>
+                    <button type="submit" class="btn btn-primary">Daftar</button>
                     <a href="{{ url('/') }}" class="btn btn-secondary">Kembali</a>
-
-                    <!-- Logout Button -->
-                    <form action="{{ route('user.logout') }}" method="POST" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Logout</button>
-                    </form>
                 </form>
             </div>
         </div>
