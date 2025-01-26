@@ -12,9 +12,15 @@ class CetakController extends Controller
     {
         try {
             $register = Registrasi::findOrFail($id); // Retrieve the register by ID
-            return view('registrasi.cetak', compact('registrasi')); // Pass the register to the view
+            return view('registrasi.cetak', compact('cetak')); // Pass the register to the view
         } catch (ModelNotFoundException $e) {
             return response()->view('errors.404', [], 404); // Return a 404 error view if not found
         }
+    }
+
+    public function store(Request $request)
+    {
+        // Handle the incoming request data
+        // You can process the data and return a response
     }
 }

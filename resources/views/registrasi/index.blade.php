@@ -12,11 +12,11 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Hi Admin</a>
+            <a class="navbar-brand" href="#">Hi User</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/registrasi') }}">Registerasiiiiiiiiiiiiiiiiiii</a>
+                        <a class="nav-link" href="{{ url('/registrasi') }}">Registerasi</a>
                     </li>
                 </ul>
             </div>
@@ -41,7 +41,7 @@
                         </ul>
                     </div>
                 @endif
-                <form method="POST" action="{{ route('cetak', ['id' => 'nama']) }}" enctype="multipart/form-data" onsubmit="return submitForm()">
+                <form method="POST" action="{{ route('peminjam.index', ['id' => 'nama']) }}" enctype="multipart/form-data" onsubmit="return submitForm()">
                     @csrf
                     <div class="form-group mb-3">
                         <label>Nama</label>

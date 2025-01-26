@@ -1,14 +1,15 @@
 <?php
 
-use App\Http\Controllers\AgamaController;
-use App\Http\Controllers\PenulisController;
-use App\Http\Controllers\BukuController;
-use App\Http\Controllers\CetakController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BukuController;
+use App\Http\Controllers\AgamaController;
+use App\Http\Controllers\CetakController;
+use App\Http\Controllers\PenulisController;
+use App\Http\Controllers\PeminjamController;
 use App\Http\Controllers\RegistrasiController;
 use App\Http\Controllers\HomeController; // Import HomeController
 use App\Http\Controllers\AdminController; // Import AdminControlle
-use Illuminate\Support\Facades\Route;
 
 //
 // Welcome page
@@ -33,4 +34,4 @@ Route::resource('buku', BukuController::class);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::resource('registrasi', RegistrasiController::class);
 Route::resource('agama', AgamaController::class);
-
+Route::get('/peminjam', [PeminjamController::class, 'index'])->name('peminjam.index');
