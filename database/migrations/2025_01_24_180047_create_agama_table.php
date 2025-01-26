@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('buku', function (Blueprint $table) {
-            $table->id();
-            $table->string('penulis')->nullable();
-            $table->string('judul')->nullable();;
-            $table->date('published_date')->nullable();;
+        Schema::create('agama', function (Blueprint $table) {
+            $table->id(); // Auto-incrementing primary key
+            $table->string('nama');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('buku');
+        Schema::dropIfExists('agama');
     }
 };

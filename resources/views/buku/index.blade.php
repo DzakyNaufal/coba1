@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Buku</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
 </head>
 <body>
     <div class="container">
-        <h2>Data Buku Datatable</h2>
+        <div class="text-left mt-4">
+            <a href="{{ url('/') }}" class="btn btn-secondary">Kembali</a>
+        </div>
+
+        <h2>Data Buku Terbaik Abad-21</h2>
         @if (Session::has('pesan'))
             <div class="alert alert-success">
                 {{ Session::get('pesan') }}
@@ -21,12 +21,13 @@
         @endif
         <div class="card">
             <div class="card-body">
-                <a href="{{ route('Buku.create') }}" class="btn btn-primary float-end mb-3">Tambah Buku</a>
+                <a href="{{ route('buku.create') }}" class="btn btn-primary float-end mb-3">Tambah Buku</a>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th width="1">ID</th>
-                            <th>Nama</th>
+                            <th>Judul Buku</th>
+                            <th>Penulis</th> <!-- New column for penulis -->
                             <th width="1">Aksi</th>
                         </tr>
                     </thead>
@@ -34,16 +35,16 @@
                         @foreach ($data as $index => $Buku)
                         <tr>
                             <td>{{ $Buku->id }}</td>
-                            <td>{{ $Buku->nama }}</td>
+                            <td>{{ $Buku->judul }}</td>
+                            <td>{{ $Buku->penulis }}</td> <!-- Display penulis data -->
                             <td>
                                 <div class="d-flex gap-2">
-                                    <a href={{ route('Buku.edit', $Buku -> id) }} class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{{ route('buku.edit', $Buku->id) }}" class="btn btn-warning btn-sm">Edit</a>
                                     <div>
-                                        <form action="{{ route('Buku.destroy', $Buku -> id) }}" method="POST">
+                                        <form action="{{ route('buku.destroy', $Buku->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button onclick="return confirm('Yakin mau dihapus?')"
-                                            type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                            <button onclick="return confirm('Yakin mau dihapus?')" type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                         </form>
                                     </div>
                                 </div>
@@ -55,8 +56,5 @@
             </div>
         </div>
     </div>
-    <script>
-        new DataTable('.datatable'); // menggunakan class
-    </script>
 </body>
 </html>

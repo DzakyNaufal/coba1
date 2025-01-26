@@ -13,7 +13,11 @@
 </head>
 <body>
     <div class="container">
-        <h2>Data Penulis Datatable</h2>
+        <div class="text-left mt-4">
+            <a href="{{ url('/') }}" class="btn btn-secondary">Kembali</a>
+        </div>
+
+        <h2>Data Penulis Terbaik Abad-21</h2>
         @if (Session::has('pesan'))
             <div class="alert alert-success">
                 {{ Session::get('pesan') }}
@@ -55,6 +59,7 @@
             </div>
         </div>
     </div>
+
     <script>
         new DataTable('.datatable'); // menggunakan class
     </script>

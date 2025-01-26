@@ -21,16 +21,21 @@
                 </ul>
             </div>
         @endif
-        <form method="POST" action={{ route('Buku.update', $Buku -> id) }} enctype="multipart/form-data">
+        <form method="POST" action={{ route('buku.update', $buku->id) }} enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label>Nama</label>
-                <input type="text" class="form-control" name="nama" value="{{ $Buku -> nama }}">
+                <label>Judul Buku</label>
+                <input type="text" class="form-control" name="judul" value="{{ $buku->judul }}">
+            </div>
+            <br/>
+            <div class="form-group">
+                <label>Penulis</label>
+                <input type="text" class="form-control" name="penulis" value="{{ $buku->penulis }}"> <!-- New field for penulis -->
             </div>
             <br/>
             <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ '/Buku' }}">Kembali</a>
+            <a href="{{ '/buku' }}" class="btn btn-success">Kembali</a>
         </form>
     </div>
 </body>

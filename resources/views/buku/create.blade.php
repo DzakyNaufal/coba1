@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Tambah Buku</h1>
+        <h1>Tambah Judul Buku</h1>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -21,16 +21,20 @@
                 </ul>
             </div>
         @endif
-        <form method="POST" action="{{ route('Buku.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('buku.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label>Nama</label>
-                <input type="text" class="form-control" name="nama">
+                <label>Judul Buku</label>
+                <input type="text" class="form-control" name="judul">
             </div>
             <br>
-
+            <div class="form-group">
+                <label>Penulis</label>
+                <input type="text" class="form-control" name="penulis"> <!-- New field for penulis -->
+            </div>
+            <br>
             <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ '/Buku' }}">Kembali</a>
+            <a href="{{ '/buku' }}" class="btn btn-success">Kembali</a>
         </form>
     </div>
 </body>

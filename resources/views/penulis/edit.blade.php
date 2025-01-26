@@ -30,7 +30,7 @@
             </div>
             <br/>
             <button type="submit" class="btn btn-primary">Simpan</button>
-            <a href="{{ '/penulis' }}">Kembali</a>
+            <a href="{{ '/penulis' }}" class="btn btn-success">Kembali</a>
         </form>
     </div>
 </body>

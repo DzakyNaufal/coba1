@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('penulis', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nama')->nullable();
             $table->timestamps();
+            $table->softDeletes(); // Add this line for soft deletes
         });
     }
 

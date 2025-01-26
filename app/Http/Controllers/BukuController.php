@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Buku;
+use Illuminate\Support\Facades\Log; // Import Log class
 
 class BukuController extends Controller
 {
@@ -13,10 +14,8 @@ class BukuController extends Controller
     public function index()
     {
         $data = Buku::get();
-
         $count = $data->count();
-
-        return view('Buku.index', compact('data', 'count'));
+        return view('buku.index', compact('data', 'count'));
     }
 
     /**
@@ -24,7 +23,7 @@ class BukuController extends Controller
      */
     public function create()
     {
-        return view('Buku.create');
+        return view('buku.create');
     }
 
     /**
@@ -32,15 +31,19 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info('Request data:', $request->all()); // Debugging statement
+
         $validated = $request->validate([
-            'nama' => 'required|string',
+            'judul' => 'required|string',
+            'penulis' => 'required|string', // Add validation for penulis
         ]);
 
-        $Buku = new Buku();
-        $Buku->nama = $request->nama;
-        $Buku->save();
+        $buku = new Buku();
+        $buku->judul = $request->judul;
+        $buku->penulis = $request->penulis; // Save penulis
+        $buku->save();
 
-        return redirect('/Buku')->with('pesan', 'Data berhasil disimpan');
+        return redirect('/buku')->with('pesan', 'Data berhasil disimpan');
     }
 
     /**
@@ -56,8 +59,8 @@ class BukuController extends Controller
      */
     public function edit($id)
     {
-        $Buku = Buku::find($id);
-        return view('Buku.edit', compact('Buku'));
+        $buku = Buku::find($id);
+        return view('buku.edit', compact('buku'));
     }
 
     /**
@@ -66,13 +69,16 @@ class BukuController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'nama' => 'required|string',
+            'judul' => 'required|string',
+            'penulis' => 'required|string', // Add validation for penulis
         ]);
-        $Buku = Buku::find($id);
-        $Buku->nama = $request->input('nama');
-        $Buku->save();
 
-        return redirect('/Buku')->with('pesan', 'Item updated successfuly');
+        $buku = Buku::find($id);
+        $buku->judul = $request->input('judul');
+        $buku->penulis = $request->input('penulis'); // Save penulis
+        $buku->save();
+
+        return redirect('/buku')->with('pesan', 'Item updated successfully');
     }
 
     /**
@@ -80,9 +86,9 @@ class BukuController extends Controller
      */
     public function destroy($id)
     {
-        $Buku = Buku::find($id);
-        $Buku->delete();
+        $buku = Buku::find($id);
+        $buku->delete();
 
-        return redirect('/Buku');
+        return redirect('/buku');
     }
 }
