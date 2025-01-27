@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('status_id');
             $table->date('tanggal_peminjaman'); // New column
             $table->date('tanggal_pengembalian'); // New column
-            $table->integer('jumlah_buku_tersisa'); // New column
+            $table->string('status_buku')->default('Tersedia'); // New column
             $table->unsignedBigInteger('buku_id'); // New column for book title
             $table->timestamps();
 

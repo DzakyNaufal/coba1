@@ -14,7 +14,7 @@
         }
 
         .card {
-            border: 2px solid #cf4b34; /* Menambahkan border dengan warna dan ketebalan */
+            border: 2px solid #b415ed; /* Menambahkan border dengan warna dan ketebalan */
             border-radius: 15px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             text-align: center; /* Center text within the card */
@@ -23,7 +23,7 @@
         .card-title {
             font-size: 1.5rem;
             font-weight: bold;
-            color: #cf4b34;
+            color: #b415ed;
         }
 
         .card-text {
@@ -69,26 +69,26 @@
         <br>
         <div class="p-4 card">
             <div class="d-flex justify-content-center">
-                <img src="{{ url('images/book2.png') }}" alt="Descriptive text about the image"
+                <img src="{{ url('images/book3.png') }}" alt="Descriptive text about the image"
                     class="mb-3 card-img-top w-25"> <!-- Gambar lebih kecil dengan margin bawah -->
             </div>
             <h5 class="card-title">Nomer Peminjaman: {{ $registrasi->id }}</h5>
             <p class="card-text"><strong>Nama:</strong> {{ $registrasi->nama }}</p>
             <p class="card-text"><strong>Email:</strong> {{ $registrasi->email }}</p>
-            <p class="card-text"><strong>Tanggal Lahir:</strong> {{ $registrasi->tanggal_lahir }}</p>
-            <p class="card-text"><strong>Judul Buku:</strong> {{ $registrasi->buku->nama }}</p>
+            <p class="card-text"><strong>No Hp:</strong> {{ $registrasi->telp }}</p>
+            <p class="card-text"><strong>Judul Buku:</strong> {{ $registrasi->buku->judul }}</p>
             <p class="card-text"><strong>Tanggal Peminjaman:</strong> {{ $registrasi->tanggal_peminjaman }}</p>
             <p class="card-text"><strong>Tanggal Pengembalian:</strong> {{ $registrasi->tanggal_pengembalian }}</p>
             <p class="card-text"><strong>Status:</strong> {{ $registrasi->status->nama }}</p>
-            <p class="card-text"><strong>No Hp:</strong> {{ $registrasi->telp }}</p>
             <p class="card-text"><strong>Alamat:</strong> {{ $registrasi->alamat }}</p>
         </div>
         <div class="mt-4 text-center no-print"> <!-- Add 'no-print' class here -->
-            <button type="button" class="btn btn-primary no-print"
-                onclick="window.location='{{ route('registrasi.downloadPdf', $registrasi->id) }}'">
+            <a href="{{ url('/registrasi') }}" class="btn btn-primary">Kembali</a>
+            <button type="button" class="btn btn-danger no-print"
+                onclick="window.location='{{ route('downloadPDF', $registrasi->id) }}'">
                 Download PDF
             </button>
-            <button class="btn btn-secondary no-print" onclick="window.print()">Print</button>
+            <button class="btn btn-success no-print" onclick="window.print()">Print</button>
         </div>
     </div>
 </body>

@@ -11,7 +11,12 @@ class Buku extends Model
 
     protected $table = 'buku';
 
-    protected $fillable = ['penulis', 'judul', 'published_date'];
+    protected $fillable = ['penulis', 'judul', 'published_date','buku_id'];
+
+    public function registrasi()
+    {
+        return $this->hasMany(Registrasi::class, 'buku_id');
+    }
 
     // Tidak ada relasi ke tabel lain karena penulis berupa teks
 }

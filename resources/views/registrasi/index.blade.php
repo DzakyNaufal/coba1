@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Registrasi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script>
         function printTable() {
             window.print();
@@ -19,7 +20,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/registrasi') }}">Registerasi</a>
+                        <a class="nav-link" href="{{ url('/registrasi/create') }}">Registrasi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/registrasi') }}">Daftar Pinjam</a>
                     </li>
                 </ul>
             </div>
@@ -33,7 +37,7 @@
     </nav>
     <div class="container">
         <div class="text-left mt-4">
-            <a href="{{ url('/') }}" class="btn btn-secondary">Kembali</a>
+
         </div>
 
         <h2>Data Registrasi Peminjaman Buku</h2>
@@ -51,9 +55,10 @@
                             <th width="1">ID</th>
                             <th>Nama</th>
                             <th>Email</th>
-                            <th>Tanggal Lahir</th>
                             <th>Telepon</th>
-                            <th>Agama</th>
+                            <th>Judul Buku</th>
+                            <th>Tanggal Peminjaman</th>
+                            <th>Tanggal Pengembalian</th>
                             <th>Status</th>
                             <th>Alamat</th>
                             <th width="1">Aksi</th>
@@ -65,15 +70,22 @@
                             <td>{{ $registrasi->id }}</td>
                             <td>{{ $registrasi->nama }}</td>
                             <td>{{ $registrasi->email }}</td>
-                            <td>{{ $registrasi->tanggal_lahir }}</td>
                             <td>{{ $registrasi->telp }}</td>
-                            <td>{{ $registrasi->agama->nama }}</td> <!-- Assuming agama relationship -->
+                            <td>{{ $registrasi->buku->judul }}</td>
+                            <td>{{ $registrasi->tanggal_peminjaman }}</td>
+                            <td>{{ $registrasi->tanggal_pengembalian }}</td>
                             <td>{{ $registrasi->status->nama }}</td> <!-- Assuming status relationship -->
                             <td>{{ $registrasi->alamat }}</td>
                             <td>
-                                <div class="d-flex gap-2">
-                                    <button onclick="printTable()" class="btn btn-info btn-sm">Print</button>
-                                    <a href="{{ route('registrasi.downloadPdf', $registrasi->id) }}" class="btn btn-success btn-sm">Download PDF</a>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <a href="{{ route('registrasi.cetak', $registrasi->id) }}" class="btn btn-success btn-sm">Cetak</a>
+                                    <form action="{{ route('registrasi.destroy', $registrasi->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button onclick="return confirm('Yakin mau dihapus?')" type="submit" class="btn btn-danger btn-sm">
+                                            <i class="fas fa-trash" style="color: white;"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>

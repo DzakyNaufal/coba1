@@ -19,4 +19,8 @@ class Registrasi extends Model
     public function status() {
         return $this->belongsTo(Status::class, 'status_id');
     }
+
+    public function buku() {
+        return $this->belongsTo(Buku::class, 'buku_id'); // Corrected to reference Buku model
+    }
 }

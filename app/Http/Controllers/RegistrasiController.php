@@ -19,7 +19,7 @@ class RegistrasiController extends Controller
         $agama = Agama::get();
         $status = Status::get(); // Fetch status options
         $buku = Buku::get(); // Fetch book options
-        $data = Registrasi::with(['agama', 'status'])->get(); // Fetch registration data with relationships
+        $data = Registrasi::with(['agama', 'status', 'buku'])->get(); // Fetch registration data with relationships
 
         return view('registrasi.index', compact('agama', 'status', 'buku', 'data')); // Pass data to the view
     }
@@ -45,7 +45,6 @@ class RegistrasiController extends Controller
             'alamat' => 'required|string',
         ]);
 
-        try {
             $registrasi = new Registrasi();
             $registrasi->nama = $request->nama;
             $registrasi->email = $request->email;
@@ -56,28 +55,25 @@ class RegistrasiController extends Controller
             $registrasi->alamat = $request->alamat;
             $registrasi->tanggal_peminjaman = $request->tanggal_peminjaman; // New field
             $registrasi->tanggal_pengembalian = $request->tanggal_pengembalian; // New field
-            $registrasi->jumlah_buku_tersisa = $request->jumlah_buku_tersisa; // New field
             $registrasi->buku_id= $request->buku;
             $registrasi->save();
 
-            return redirect('/registrasi/index')->with('pesan', 'Pendaftaran berhasil');
-        } catch (\Exception $e) {
-            Log::error('Error saving registration: ' . $e->getMessage());
-            return redirect()->back()->withErrors(['error' => 'Data could not be saved.']);
-        }
+            return redirect('/registrasi')->with('pesan', 'Pendaftaran berhasil');
+
     }
 
     public function cetak($id)
     {
         $registrasi = Registrasi::find($id);
-        return view('registrasi.cetak', compact('registrasi'));
+        return view('/registrasi/cetak', compact('registrasi'));
     }
 
-    public function downloadPDF($id)
+    public function destroy($id)
     {
-        $registrasi = Registrasi::find($id);
-        $pdf = app('dompdf.wrapper');
-        $pdf->loadView('cetak', compact('registrasi'));
-        return $pdf->download('registrasi'. $registrasi->id.'.pdf');
+        $register = Registrasi::findOrFail($id);
+        $register->delete();
+
+        return redirect('/registrasi')->with('pesan', 'Pendaftar berhasil dihapus'); // Redirect with success message
     }
+
 }

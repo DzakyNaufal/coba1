@@ -53,15 +53,13 @@
         <div>
             <a href="{{ url('/admin/login') }}" class="btn btn-danger"> Login Admin</a>
         </div>
-        <div>Hi Bosss!</div>
+        <div>Senin, 27 Januari 2025</div>
     </header>
 
     <div class="container">
         <h1>Selamat Datang Di Halaman Kami</h1>
         <div>
-            <a href="{{ url('/penulis') }}" class="btn btn-success">Penulis</a>
-            <a href="{{ url('/buku') }}" class="btn btn-dark">Buku</a>
-            <a href="{{ url('/registrasi') }}" class="btn btn-warning">Form Registrasi</a>
+
         </div>
 
         <!-- Login Card -->

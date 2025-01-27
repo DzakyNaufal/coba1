@@ -16,7 +16,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('registrasi.create'); // Redirect to registration page
+            return redirect()->route('registrasi.index'); // Redirect to registration page
         }
 
         return back()->withErrors([

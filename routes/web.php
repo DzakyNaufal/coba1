@@ -32,9 +32,15 @@ Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.d
 Route::get('/cetak/{id}', [CetakController::class, 'cetak'])->name('cetak');
 Route::resource('penulis', PenulisController::class);
 Route::resource('buku', BukuController::class);
+Route::resource('agama', AgamaController::class);
+
+//Registrasi
 Route::resource('registrasi', RegistrasiController::class);
 Route::get('registrasi', [RegistrasiController::class, 'index'])->name('registrasi.index');
-Route::get('registrasi', [RegistrasiController::class, 'index'])->name('registrasi');
-Route::get('registrasi', [RegistrasiController::class, 'downloadPDF'])->name('registrasi.download');
 Route::post('registrasi', [RegistrasiController::class, 'store'])->name('registrasi.store');
-Route::resource('agama', AgamaController::class);
+Route::get('registrasi/cetak/{id}', [RegistrasiController::class, 'cetak'])->name('registrasi.cetak'); // Updated to GET
+Route::get('registrasi/download/{id}', [RegistrasiController::class, 'downloadPDF'])->name('downloadPDF');
+Route::delete('registrasi/{id}', action: [RegistrasiController::class, 'destroy'])->name('registrasi.destroy');
+
+//PDF
+Route::get('registrasi/download/{id}', [CetakController::class, 'downloadPDF'])->name('downloadPDF');

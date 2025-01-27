@@ -16,7 +16,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/registrasi') }}">Registerasi</a>
+                        <a class="nav-link" href="{{ url('/registrasi/create') }}">Registrasi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/registrasi') }}">Daftar Pinjam</a>
                     </li>
                 </ul>
             </div>
@@ -62,7 +65,7 @@
                         <label>Judul Buku</label>
                         <select name="buku" class="form-control" required>
                             @foreach($buku as $b)
-                            <option value="{{ $b->id }}">{{ $b->judul }}</option>
+                            <option value="{{ $b->id }}">{{ $b->judul }} - {{ $b->status_buku }}</option>
                             @endforeach
                         </select>
                     </div>

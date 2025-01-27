@@ -35,7 +35,7 @@
     </nav>
     <div class="container">
         <div class="text-left mt-4">
-            <a href="{{ url('/') }}" class="btn btn-secondary">Kembali</a>
+
         </div>
 
         <h2>Data Penulis Terbaik Abad-21</h2>

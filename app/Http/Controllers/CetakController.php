@@ -20,7 +20,37 @@ class CetakController extends Controller
 
     public function store(Request $request)
     {
-        // Handle the incoming request data
-        // You can process the data and return a response
+        $validated = $request->validate([
+            'nama' => 'required|string',
+            'email' => 'required|email',
+            'tanggal_lahir' => 'required|date',
+            'telp' => 'required|numeric',
+            'buku' => 'required|integer',
+            'tanggal_peminjaman' => 'required|date',
+            'tanggal_pengembalian' => 'required|date',
+            'status' => 'required|integer',
+            'alamat' => 'required|string',
+        ]);
+
+            $registrasi = new Registrasi();
+            $registrasi->nama = $request->nama;
+            $registrasi->email = $request->email;
+            $registrasi->telp = $request->telp;
+            $registrasi->buku_id= $request->buku;
+            $registrasi->tanggal_peminjaman = $request->tanggal_peminjaman; // New field
+            $registrasi->tanggal_pengembalian = $request->tanggal_pengembalian; // New field
+            $registrasi->status_id = $request->status;
+            $registrasi->alamat = $request->alamat;
+            $registrasi->save();
+
+            return redirect('/registrasi')->with('pesan', 'Pendaftaran berhasil');
+    }
+
+    public function downloadPDF($id)
+    {
+        $registrasi = Registrasi::find($id); // Retrieve the registration record
+        $pdf = app('dompdf.wrapper'); // Create a new PDF instance
+        $pdf->loadView('registrasi.cetak', compact('registrasi')); // Load the view with the registration data
+        return $pdf->download('registrasi' . $registrasi->id . '.pdf'); // Download the PDF
     }
 }

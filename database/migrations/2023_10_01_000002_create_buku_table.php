@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('buku', function (Blueprint $table) {
             $table->id();
             $table->string('penulis')->nullable();
-            $table->string('judul')->nullable();;
+            $table->string(column: 'judul')->nullable();;
+            $table->string('status_buku')->default('Tersedia'); // New column
             $table->date('published_date')->nullable();;
             $table->timestamps();
         });
