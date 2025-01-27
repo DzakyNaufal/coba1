@@ -18,5 +18,9 @@ class DatabaseSeeder extends Seeder
 
         // Call the AgamaSeeder
         $this->call(StatusSeeder::class);
+
+        $this->call(AdminSeeder::class);
+
+        $this->call(UserSeeder::class);
     }
 }

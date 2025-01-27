@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,12 +16,24 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('registrasi.index'); // Redirect to registration page
+            return redirect()->route('registrasi.create'); // Redirect to registration page
         }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
+    }
+
+    public function store(LoginRequest $request)
+    {
+        $request->authenticate(); // Corrected typo here
+
+        if (Auth::user()->is_admin) {
+            return redirect()->route('admin.login'); // Use named route for admin dashboard
+        }
+
+        return redirect()->route('user.login');
+
     }
 
     public function adminLoginPage()
@@ -36,7 +49,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.dashboard'); // Redirect to admin dashboard
+            return redirect()->route('penulis.index'); // Use named route for admin dashboard
         }
 
         return back()->withErrors([

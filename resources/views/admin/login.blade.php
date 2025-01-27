@@ -14,11 +14,11 @@
                 @csrf
                 <div class="form-group mb-3">
                     <label>Email:</label>
-                    <input type="email" name="email" class="form-control" value="admin1@mail.com" required>
+                    <input type="email" name="email" class="form-control" value="" required>
                 </div>
                 <div class="form-group mb-3">
                     <label>Password:</label>
-                    <input type="password" name="password" class="form-control" value="password" required>
+                    <input type="password" name="password" class="form-control" value="" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
                 <a href="{{ url('/') }}" class="btn btn-secondary">Kembali</a>

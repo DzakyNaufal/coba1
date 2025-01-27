@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Registrasi Peminjaman Buku</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-    rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-    crossorigin="anonymous">
+    <title>Registrasi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script>
+        function printTable() {
+            window.print();
+        }
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -28,80 +31,55 @@
             </div>
         </div>
     </nav>
-    <div class="container mt-5">
+    <div class="container">
+        <div class="text-left mt-4">
+            <a href="{{ url('/') }}" class="btn btn-secondary">Kembali</a>
+        </div>
+
+        <h2>Data Registrasi Peminjaman Buku</h2>
+        @if (Session::has('pesan'))
+            <div class="alert alert-success">
+                {{ Session::get('pesan') }}
+            </div>
+        @endif
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Registrasi Peminjaman Buku</h5>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <form method="POST" action="{{ route('peminjam.index', ['id' => 'nama']) }}" enctype="multipart/form-data" onsubmit="return submitForm()">
-                    @csrf
-                    <div class="form-group mb-3">
-                        <label>Nama</label>
-                        <input type="text" class="form-control" name="nama" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>E-mail</label>
-                        <input type="email" class="form-control" name="email" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Tanggal Lahir</label>
-                        <input type="date" class="form-control" name="tanggal_lahir" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Nomor Telepon</label>
-                        <input type="text" class="form-control" name="telp" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Agama</label>
-                        <select name="agama" class="form-control" required>
-                            @foreach($agama as $d)
-                            <option value="{{ $d->id }}">{{ $d->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Judul Buku</label>
-                        <select name="buku_id" class="form-control" required>
-                            @foreach($buku as $b)
-                            <option value="{{ $b->id }}">{{ $b->judul }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Jumlah Buku Tersisa</label>
-                        <input type="number" class="form-control" name="jumlah_buku_tersisa" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Tanggal Peminjaman</label>
-                        <input type="date" class="form-control" name="tanggal_peminjaman" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Tanggal Pengembalian</label>
-                        <input type="date" class="form-control" name="tanggal_pengembalian" required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Status Peminjam</label>
-                        <select name="status" class="form-control" required>
-                            @foreach($status as $d)
-                            <option value="{{ $d->id }}" {{ $d->id == old('status') ? 'disabled' : '' }}>{{ $d->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Alamat</label>
-                        <textarea class="form-control" name="alamat" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Daftar</button>
-                    <a href="{{ url('/') }}" class="btn btn-secondary">Kembali</a>
-                </form>
+                <a href="{{ route('registrasi.create') }}" class="btn btn-primary float-end mb-3">Pinjam Buku</a>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="1">ID</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Tanggal Lahir</th>
+                            <th>Telepon</th>
+                            <th>Agama</th>
+                            <th>Status</th>
+                            <th>Alamat</th>
+                            <th width="1">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data as $index => $registrasi)
+                        <tr>
+                            <td>{{ $registrasi->id }}</td>
+                            <td>{{ $registrasi->nama }}</td>
+                            <td>{{ $registrasi->email }}</td>
+                            <td>{{ $registrasi->tanggal_lahir }}</td>
+                            <td>{{ $registrasi->telp }}</td>
+                            <td>{{ $registrasi->agama->nama }}</td> <!-- Assuming agama relationship -->
+                            <td>{{ $registrasi->status->nama }}</td> <!-- Assuming status relationship -->
+                            <td>{{ $registrasi->alamat }}</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <button onclick="printTable()" class="btn btn-info btn-sm">Print</button>
+                                    <a href="{{ route('registrasi.downloadPdf', $registrasi->id) }}" class="btn btn-success btn-sm">Download PDF</a>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

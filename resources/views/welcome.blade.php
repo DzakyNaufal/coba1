@@ -72,11 +72,11 @@
                     @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="user@mail.com" required>
+                        <input type="email" class="form-control" id="email" name="email" value="" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" value="password" required>
+                        <input type="password" class="form-control" id="password" name="password" value="" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Login</button>
                 </form>
